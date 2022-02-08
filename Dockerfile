@@ -30,6 +30,7 @@ RUN wget --progress=bar:force -O ghidra_${GHIDRA_VERSION}.zip ${GHIDRA_RELEASE_U
 RUN cd ${GHIDRA_INSTALL_PATH}/ghidra/server && \
     mkdir -p ${GHIDRA_REPOS_PATH} && \
     sed 's|ghidra.repositories.dir=.*|ghidra.repositories.dir='"${GHIDRA_REPOS_PATH}"'|' server.conf > ${GHIDRA_REPOS_PATH}/server.conf && \
+    sed 's|ghidra.ip=localhost.*|ghidra.ip=localhost='"${GHIDRA_IP}"'|' server.conf > ${GHIDRA_REPOS_PATH}/server.conf && \
     sed 's|JAVA_HOME=|# JAVA_HOME=|' ${GHIDRA_INSTALL_PATH}/ghidra/server/ghidraSvr > ${GHIDRA_INSTALL_PATH}/ghidra/server/ghidraSvr && \
     sed 's|JAVA_HOME=|# JAVA_HOME=|' ${GHIDRA_INSTALL_PATH}/ghidra/support/launch.sh > ${GHIDRA_INSTALL_PATH}/ghidra/support/launch.sh && \
     rm server.conf && \
